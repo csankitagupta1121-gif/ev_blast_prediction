@@ -11,7 +11,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-model = joblib.load("dtc_model(1).pkl")
+model = joblib.load("dtc_model.pkl")
 
 st.title("ev_blast_prediction !")
 
