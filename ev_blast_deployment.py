@@ -24,7 +24,7 @@ Temperature = st.number_input("Temperature")
 Overcharge_Overdischarge = st.selectbox("Overcharge / Overdischarge", [0, 1])
 Battery_Maintenance = st.selectbox("Battery Maintenance", [0, 1])
 
-input_data = pd.DataFrame([[ 
+input_data = pd.DataFrame([[
     Battery_Types,
     Temperature,
     External_Abuse,
@@ -33,10 +33,20 @@ input_data = pd.DataFrame([[
     Overcharge_Overdischarge,
     Battery_Maintenance,
     Poor_Battery_Design
-]], columns=model.feature_names_in_)
+]], columns=[
+    "Battery_Types",
+    "Temperature",
+    "External_Abuse",
+    "Short_Circuits",
+    "Poor_Cell_Design",
+    "Overcharge_Overdischarge",
+    "Battery_Maintenance",
+    "Poor_Battery_Design"
+])
 
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
+
     if prediction == 1:
         st.error("EV Blast Predicted")
     else:
