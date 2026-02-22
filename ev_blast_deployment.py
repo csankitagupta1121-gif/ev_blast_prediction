@@ -13,9 +13,9 @@ import joblib
 
 model = joblib.load("dtc_model.pkl")
 
-st.title("ev_blast_prediction !")
+st.title("EV Blast Prediction")
 
-Battery_Types = st.number_input("Battery Types", min_value=0)
+Battery_Type = st.number_input("Battery Type", min_value=0)
 Poor_Cell_Design = st.selectbox("Poor Cell Design", [0, 1])
 External_Abuse = st.selectbox("External Abuse", [0, 1])
 Poor_Battery_Design = st.selectbox("Poor Battery Design", [0, 1])
@@ -24,28 +24,28 @@ Temperature = st.number_input("Temperature")
 Overcharge_Overdischarge = st.selectbox("Overcharge / Overdischarge", [0, 1])
 Battery_Maintenance = st.selectbox("Battery Maintenance", [0, 1])
 
-input_data = pd.DataFrame([[
-    Battery_Types,
-    Temperature,
-    External_Abuse,
-    Short_Circuits,
-    Poor_Cell_Design,
-    Overcharge_Overdischarge,
-    Battery_Maintenance,
-    Poor_Battery_Design
-]], columns=[
-    "Battery_Types",
-    "Temperature",
-    "External_Abuse",
-    "Short_Circuits",
-    "Poor_Cell_Design",
-    "Overcharge_Overdischarge",
-    "Battery_Maintenance",
-    "Poor_Battery_Design"
-])
+input_dict = {
+    "Battery_Type": Battery_Type,
+    "Poor_Cell_Design": Poor_Cell_Design,
+    "External_Abuse": External_Abuse,
+    "Poor_Battery_Design": Poor_Battery_Design,
+    "Short_Circuits": Short_Circuits,
+    "Temperature": Temperature,
+    "Overcharge_Overdischarge": Overcharge_Overdischarge,
+    "Battery_Maintenance": Battery_Maintenance
+}
 
+input_df = pd.DataFrame([input_dict])
+
+# Apply same encoding used during training
+input_encoded = pd.get_dummies(input_df)
+
+# Match training feature order
+input_encoded = input_encoded.reindex(columns=model.feature_names_in_, fill_value=0)
+
+# Prediction
 if st.button("Predict"):
-    prediction = model.predict(input_data)[0]
+    prediction = model.predict(input_encoded)[0]
 
     if prediction == 1:
         st.error("EV Blast Predicted")
