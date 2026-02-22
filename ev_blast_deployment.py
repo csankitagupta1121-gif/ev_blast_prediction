@@ -24,7 +24,7 @@ Temperature = st.number_input("Temperature")
 Overcharge_Overdischarge = st.selectbox("Overcharge / Overdischarge", [0, 1])
 Battery_Maintenance = st.selectbox("Battery Maintenance", [0, 1])
 
-input_data = pd.DataFrame([[
+input_data = pd.DataFrame([[ 
     Battery_Types,
     Poor_Cell_Design,
     External_Abuse,
@@ -32,8 +32,17 @@ input_data = pd.DataFrame([[
     Short_Circuits,
     Temperature,
     Overcharge_Overdischarge,
-    Battery_Maintenance,
-]], columns=model.feature_names_in_)
+    Battery_Maintenance
+]], columns=[
+    "Battery_Types",
+    "Poor_Cell_Design",
+    "External_Abuse",
+    "Poor_Battery_Design",
+    "Short_Circuits",
+    "Temperature",
+    "Overcharge_Overdischarge",
+    "Battery_Maintenance"
+])
 
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
