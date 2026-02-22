@@ -33,17 +33,7 @@ input_data = pd.DataFrame([[
     Temperature,
     Overcharge_Overdischarge,
     Battery_Maintenance
-]], columns=[
-    "Battery_Types",
-    "Poor_Cell_Design",
-    "External_Abuse",
-    "Poor_Battery_Design",
-    "Short_Circuits",
-    "Temperature",
-    "Overcharge_Overdischarge",
-    "Battery_Maintenance"
-])
-
+]], 
 input_data = input_data[model.feature_names_in_]
 
 if st.button("Predict"):
