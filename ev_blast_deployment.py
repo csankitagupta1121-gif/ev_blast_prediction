@@ -11,9 +11,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-model = joblib.load("dtc_model.pkl")
+model = joblib.load("dtc_model(1).pkl")
 
-st.title("EV Blast Prediction App")
+st.title("ev_blast_prediction !")
 
 Battery_Types = st.number_input("Battery Types", min_value=0)
 Poor_Cell_Design = st.selectbox("Poor Cell Design", [0, 1])
