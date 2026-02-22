@@ -34,7 +34,6 @@ input_data = pd.DataFrame([[
     Overcharge_Overdischarge,
     Battery_Maintenance
 ]]), 
-input_data = input_data[model.feature_names_in_]
 
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
