@@ -26,14 +26,14 @@ Battery_Maintenance = st.selectbox("Battery Maintenance", [0, 1])
 
 input_data = pd.DataFrame([[ 
     Battery_Types,
-    Poor_Cell_Design,
-    External_Abuse,
-    Poor_Battery_Design,
-    Short_Circuits,
     Temperature,
+    External_Abuse,
+    Short_Circuits,
+    Poor_Cell_Design,
     Overcharge_Overdischarge,
-    Battery_Maintenance
-]]), 
+    Battery_Maintenance,
+    Poor_Battery_Design
+]], columns=model.feature_names_in_)
 
 if st.button("Predict"):
     prediction = model.predict(input_data)[0]
