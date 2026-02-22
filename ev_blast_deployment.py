@@ -8,22 +8,22 @@ Original file is located at
 """
 
 import streamlit as st
-import joblib
 import pandas as pd
+import joblib
 
-model=joblib.load("dtc_model(1).pkl")
+model = joblib.load("dtc_model(1).pkl")
 
-st.title("ev_blast_prediction !")
+st.title("ev_blast_deployment !")
 
-Battery_Types = st.number_input("Battery_Types")
-Poor_Cell_Design = st.number_input("Poor_Cell_Design")
-External_Abuse = st.number_input("External_Abuse")
-Poor_Battery_Design = st.number_input("Poor_Battery_Design")
-Short_Circuits = st.number_input("Short_Circuits")
+Battery_Types = st.number_input("Battery Types", min_value=0)
+Poor_Cell_Design = st.selectbox("Poor Cell Design", [0, 1])
+External_Abuse = st.selectbox("External Abuse", [0, 1])
+Poor_Battery_Design = st.selectbox("Poor Battery Design", [0, 1])
+Short_Circuits = st.selectbox("Short Circuits", [0, 1])
 Temperature = st.number_input("Temperature")
-Overcharge_Overdischarge = st.number_input("Overcharge_Overdischarge")
-Battery_Maintenance = st.number_input("Battery_Maintenance")
-Battery_Health = st.number_input("Battery_Health")
+Overcharge_Overdischarge = st.selectbox("Overcharge / Overdischarge", [0, 1])
+Battery_Maintenance = st.selectbox("Battery Maintenance", [0, 1])
+Battery_Health = st.number_input("Battery Health")
 
 input_data = pd.DataFrame([[
     Battery_Types,
@@ -37,9 +37,9 @@ input_data = pd.DataFrame([[
     Battery_Health
 ]], columns=model.feature_names_in_)
 
-if st.button("predict"):
+if st.button("Predict"):
     prediction = model.predict(input_data)[0]
     if prediction == 1:
-      st.success("EV Blast Predicted")
+        st.error("EV Blast Predicted")
     else:
-      st.success("No EV Blast Predicted")
+        st.success("No EV Blast Predicted")
